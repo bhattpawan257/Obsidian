@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "2b18ef10ea3feced",
+        "id": "65609fa26f525bee",
         "type": "tabs",
         "children": [
           {
-            "id": "042b50fc38d399b1",
+            "id": "d7421b8f9c250935",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -171,8 +171,9 @@
       "widgets:Add widget": false
     }
   },
-  "active": "042b50fc38d399b1",
+  "active": "d7421b8f9c250935",
   "lastOpenFiles": [
+    "Daily Notes/2026-09-21.md",
     "Study/Study Dashboard.md",
     "Template/Daily note template.md",
     "Template",
