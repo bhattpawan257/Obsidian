@@ -1,0 +1,34 @@
+{
+  "enabled": true,
+  "forceAllMarkdownReadOnly": false,
+  "useGlobPatterns": false,
+  "caseSensitive": true,
+  "debug": false,
+  "debugVerbosePaths": false,
+  "dismissedWelcomeVersion": 1,
+  "includeRules": [
+    "Study/",
+    "Template/"
+  ],
+  "excludeRules": [],
+  "includeRuleEnabled": [
+    true,
+    true
+  ],
+  "excludeRuleEnabled": [],
+  "includeRuleEntries": [
+    {
+      "sourceKind": "vault-path",
+      "sourceValue": "Study",
+      "resolvedPath": "Study/",
+      "enabled": true
+    },
+    {
+      "sourceKind": "vault-path",
+      "sourceValue": "Template",
+      "resolvedPath": "Template/",
+      "enabled": true
+    }
+  ],
+  "excludeRuleEntries": []
+}
