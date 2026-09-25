@@ -25,5 +25,11 @@
   ],
   "defaultViewMode": "preview",
   "showInlineTitle": false,
-  "readableLineLength": true
+  "readableLineLength": true,
+  "userIgnoreFilters": [
+    "Daily Notes/",
+    "Template/"
+  ],
+  "showLineNumber": false,
+  "tabSize": 5
 }

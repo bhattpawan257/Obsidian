@@ -8,10 +8,12 @@
   "dismissedWelcomeVersion": 1,
   "includeRules": [
     "Study/",
-    "Template/"
+    "Template/",
+    "Daily Notes/"
   ],
   "excludeRules": [],
   "includeRuleEnabled": [
+    true,
     true,
     true
   ],
@@ -27,6 +29,12 @@
       "sourceKind": "vault-path",
       "sourceValue": "Template",
       "resolvedPath": "Template/",
+      "enabled": true
+    },
+    {
+      "sourceKind": "vault-path",
+      "sourceValue": "Daily Notes",
+      "resolvedPath": "Daily Notes/",
       "enabled": true
     }
   ],

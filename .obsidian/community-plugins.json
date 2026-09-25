@@ -2,7 +2,6 @@
   "dataview",
   "contribution-graph",
   "simple-time-tracker",
-  "widgets",
-  "read-only-view",
-  "obsidian-git"
+  "obsidian-git",
+  "obsidian-charts"
 ]

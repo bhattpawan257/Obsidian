@@ -1,0 +1,26 @@
+/* Make Dataview tables full width and centered */
+.table-view-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+/* Style the headers */
+.table-view-table th {
+    background-color: var(--background-secondary);
+    color: var(--text-accent);
+    font-size: 1.1em;
+    padding: 10px;
+    border-bottom: 2px solid var(--background-modifier-border);
+}
+
+/* Add padding to cells */
+.table-view-table td {
+    padding: 8px;
+}
+
+/* Highlight rows when hovered/tapped */
+.table-view-table tbody tr:hover {
+    background-color: var(--background-modifier-hover);
+    transition: background-color 0.2s ease;
+}

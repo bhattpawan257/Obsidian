@@ -1,0 +1,17 @@
+/* Reading View: The entire code box scrolls smoothly */
+.markdown-reading-view pre {
+    overflow-x: auto !important;
+}
+
+.markdown-reading-view code {
+    white-space: pre !important;
+    word-wrap: normal !important;
+}
+
+/* Editing View: Forces the background color to wrap around overflowing text */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock {
+    white-space: pre !important;
+    word-wrap: normal !important;
+    display: inline-block !important;
+    min-width: 100% !important;
+}

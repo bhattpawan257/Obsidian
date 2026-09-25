@@ -1,114 +1,43 @@
-```dataviewjs
-const btn = this.container.createEl('button', { text: "📝 Open Today's Note", cls: "mod-cta" });
-btn.style.width = "100%";
-btn.style.padding = "12px";
-btn.style.fontSize = "1.2em";
-btn.style.fontWeight = "bold";
-btn.style.marginBottom = "15px";
-
-btn.onclick = () => {
-    app.commands.executeCommandById("daily-notes");
-};
-```
-
-```dataviewjs
-function extractMins(fileContent, subjectHeader) {
-  const safeHeader = subjectHeader.replace(/\*/g, "\\*");
-  const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
-  const match = fileContent.match(regex);
-  if (!match) return 0;
-  try {
-    const data = JSON.parse(match[1]);
-    let totalMs = 0;
-    if (data.entries) {
-      for (let entry of data.entries) {
-        if (entry.startTime && entry.endTime) totalMs += (new Date(entry.endTime).getTime() - new Date(entry.startTime).getTime());
-        if (entry.subEntries) {
-          for (let sub of entry.subEntries) {
-            if (sub.startTime && sub.endTime) totalMs += (new Date(sub.endTime).getTime() - new Date(sub.startTime).getTime());
-          }
-        }
-      }
-    } return Math.round(totalMs / 60000);
-  } catch (e) { return 0; }
-}
-
-const pages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
-let mTotal = 0, pTotal = 0, cTotal = 0, days = 0;
-let activeDates = new Set();
-
-for (let p of pages) {
-  const fileContent = await dv.io.load(p.file.path);
-  const m = extractMins(fileContent, "**Math**");
-  const ph = extractMins(fileContent, "**Physics**");
-  const c = extractMins(fileContent, "**Chemistry**");
-  
-  mTotal += m; pTotal += ph; cTotal += c;
-  
-  if (m + ph + c > 0) {
-      activeDates.add(p.file.name);
-      days++;
-  }
-}
-
-const totalMins = mTotal + pTotal + cTotal;
-const totalHours = (totalMins / 60).toFixed(1);
-const avgMins = days > 0 ? Math.round(totalMins / days) : 0;
-
-let topSubject = "None";
-if (mTotal >= pTotal && mTotal >= cTotal && mTotal > 0) topSubject = "📐 Math";
-else if (pTotal >= mTotal && pTotal >= cTotal && pTotal > 0) topSubject = "🍎 Physics";
-else if (cTotal >= mTotal && cTotal >= pTotal && cTotal > 0) topSubject = "🧪 Chemistry";
-
-let streak = 0;
-const today = window.moment().format("YYYY-MM-DD");
-const yesterday = window.moment().subtract(1, 'days').format("YYYY-MM-DD");
-let checkDate = today;
-
-if (!activeDates.has(today)) checkDate = yesterday;
-
-while(activeDates.has(checkDate)) {
-    streak++;
-    checkDate = window.moment(checkDate).subtract(1, 'days').format("YYYY-MM-DD");
-}
-
-dv.paragraph(`> [!abstract] 📊 Quick Stats\n> **Total Time:** ${totalHours} hours\n> **Daily Average:** ${avgMins} mins/day\n> **Top Subject:** ${topSubject}\n> 🔥 **Current Streak:** ${streak} Days`);
-```
-
----
-
 ## Total Study Activity
 
 ```dataviewjs
-function extractMins(fileContent, subjectHeader) {
+function extractMinsForSubject(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
   const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
   const match = fileContent.match(regex);
   if (!match) return 0;
+  
   try {
     const data = JSON.parse(match[1]);
     let totalMs = 0;
     if (data.entries) {
       for (let entry of data.entries) {
-        if (entry.startTime && entry.endTime) totalMs += (new Date(entry.endTime).getTime() - new Date(entry.startTime).getTime());
+        if (entry.startTime && entry.endTime) {
+          totalMs += (new Date(entry.endTime).getTime() - new Date(entry.startTime).getTime());
+        }
         if (entry.subEntries) {
           for (let sub of entry.subEntries) {
-            if (sub.startTime && sub.endTime) totalMs += (new Date(sub.endTime).getTime() - new Date(sub.startTime).getTime());
+            if (sub.startTime && sub.endTime) {
+              totalMs += (new Date(sub.endTime).getTime() - new Date(sub.startTime).getTime());
+            }
           }
         }
       }
-    } return Math.round(totalMs / 60000);
-  } catch (e) { return 0; }
+    } 
+    return Math.round(totalMs / 60000);
+  } catch (e) {
+    return 0;
+  }
 }
 
 const totalData = [];
-const totalPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
+const totalPages = dv.pages('"Daily Notes"').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
 
 for (let p of totalPages) {
   const fileContent = await dv.io.load(p.file.path);
-  const m = extractMins(fileContent, "**Math**");
-  const ph = extractMins(fileContent, "**Physics**");
-  const ch = extractMins(fileContent, "**Chemistry**");
+  const m = extractMinsForSubject(fileContent, "**Math**");
+  const ph = extractMinsForSubject(fileContent, "**Physics**");
+  const ch = extractMinsForSubject(fileContent, "**Chemistry**");
   const totalMins = m + ph + ch;
 
   if (totalMins > 0) {
@@ -116,7 +45,7 @@ for (let p of totalPages) {
   }
 }
 
-renderContributionGraph(this.container, {
+const totalCalendarData = {
   title: "Total Study Activity (Minutes)",
   data: totalData,
   cellStyle: { minWidth: "25px", minHeight: "25px" },
@@ -141,117 +70,34 @@ renderContributionGraph(this.container, {
       new Notice(`0min studied on ${item.date}`);
     }
   }
-});
+};
+renderContributionGraph(this.container, totalCalendarData);
 ```
 
 ---
-
-## Weekly Goal: 15 Hours
-
 ```dataviewjs
-function extractMins(fileContent, subjectHeader) {
+const btn = this.container.createEl('button', { text: "📝 Open Today's Note", cls: "mod-cta" });
+btn.style.width = "100%";
+btn.style.padding = "12px";
+btn.style.fontSize = "1.2em";
+btn.style.fontWeight = "bold";
+btn.style.marginBottom = "15px";
+
+btn.onclick = () => {
+    // This triggers the exact same action as clicking the ribbon icon
+    app.commands.executeCommandById("daily-notes");
+};
+```
+---
+```dataviewjs
+function extractSecsForSubject(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
   const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
   const match = fileContent.match(regex);
   if (!match) return 0;
-  try {
-    const data = JSON.parse(match[1]);
-    let totalMs = 0;
-    if (data.entries) {
-      for (let entry of data.entries) {
-        if (entry.startTime && entry.endTime) totalMs += (new Date(entry.endTime).getTime() - new Date(entry.startTime).getTime());
-        if (entry.subEntries) {
-          for (let sub of entry.subEntries) {
-            if (sub.startTime && sub.endTime) totalMs += (new Date(sub.endTime).getTime() - new Date(sub.startTime).getTime());
-          }
-        }
-      }
-    } return Math.round(totalMs / 60000);
-  } catch (e) { return 0; }
-}
-
-const sevenDaysAgo = window.moment().subtract(7, 'days').format("YYYY-MM-DD");
-const weekPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/) && p.file.name >= sevenDaysAgo);
-
-let weekTotalMins = 0;
-for (let p of weekPages) {
-  const content = await dv.io.load(p.file.path);
-  weekTotalMins += extractMins(content, "**Math**");
-  weekTotalMins += extractMins(content, "**Physics**");
-  weekTotalMins += extractMins(content, "**Chemistry**");
-}
-
-const goalMins = 900; 
-const percentage = Math.min(Math.round((weekTotalMins / goalMins) * 100), 100);
-
-dv.paragraph(`<div style="width: 100%; background-color: var(--background-modifier-border); border-radius: 8px; overflow: hidden; height: 20px;">
-  <div style="width: ${percentage}%; background-color: #39d353; height: 100%; text-align: center; color: black; font-size: 12px; font-weight: bold; line-height: 20px;">
-    ${percentage}% (${Math.round(weekTotalMins / 60)}h / 15h)
-  </div>
-</div>`);
-```
-
----
-
-## Topics Covered (Last 7 Days)
-
-```dataviewjs
-function extractTopics(fileContent, subjectHeader) {
-  const safeHeader = subjectHeader.replace(/\*/g, "\\*");
-  const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
-  const match = fileContent.match(regex);
-  let topics = new Set();
-  if (!match) return [];
   
   try {
     const data = JSON.parse(match[1]);
-    if (data.entries) {
-      for (let entry of data.entries) {
-        const t = entry.name ? entry.name.trim() : "";
-        if (t && !t.toLowerCase().startsWith("segment") && !t.toLowerCase().startsWith("part")) topics.add(t);
-        if (entry.subEntries) {
-          for (let sub of entry.subEntries) {
-            const st = sub.name ? sub.name.trim() : "";
-            if (st && !st.toLowerCase().startsWith("segment") && !st.toLowerCase().startsWith("part")) topics.add(st);
-          }
-        }
-      }
-    }
-  } catch (e) {}
-  return Array.from(topics);
-}
-
-const sevenDaysAgo = window.moment().subtract(7, 'days').format("YYYY-MM-DD");
-const weekPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/) && p.file.name >= sevenDaysAgo);
-
-let mathTopics = new Set(), phyTopics = new Set(), chemTopics = new Set();
-
-for (let p of weekPages) {
-  const content = await dv.io.load(p.file.path);
-  extractTopics(content, "**Math**").forEach(t => mathTopics.add(t));
-  extractTopics(content, "**Physics**").forEach(t => phyTopics.add(t));
-  extractTopics(content, "**Chemistry**").forEach(t => chemTopics.add(t));
-}
-
-dv.table(["Subject", "Concepts & Topics"], [
-   ["📐 Math", Array.from(mathTopics).join(", ") || "-"],
-   ["🍎 Physics", Array.from(phyTopics).join(", ") || "-"],
-   ["🧪 Chemistry", Array.from(chemTopics).join(", ") || "-"]
-]);
-```
-
----
-
-## Recent Study Sessions
-
-```dataviewjs
-function extractSecs(fileContent, subjectHeader) {
-  const safeHeader = subjectHeader.replace(/\*/g, "\\*");
-  const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
-  const match = fileContent.match(regex);
-  if (!match) return 0;
-  try {
-    const data = JSON.parse(match[1]);
     let totalMs = 0;
     if (data.entries) {
       for (let entry of data.entries) {
@@ -262,7 +108,8 @@ function extractSecs(fileContent, subjectHeader) {
           }
         }
       }
-    } return Math.round(totalMs / 1000);
+    } 
+    return Math.round(totalMs / 1000);
   } catch (e) { return 0; }
 }
 
@@ -271,21 +118,27 @@ function formatTime(totalSecs) {
   const h = Math.floor(totalSecs / 3600);
   const m = Math.floor((totalSecs % 3600) / 60);
   const s = totalSecs % 60;
+  
   let str = "";
   if (h > 0) str += `${h}h `;
   if (m > 0 || h > 0) str += `${m}m `;
   str += `${s}s`;
+  
   return `<span style='font-size: 0.8em; white-space: nowrap;'>${str.trim()}</span>`;
 }
 
-const recentPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'desc').limit(3);
+const recentPages = dv.pages('"Daily Notes"')
+  .where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/))
+  .sort(p => p.file.name, 'desc')
+  .limit(3);
+
 const recentTableData = [];
 
 for (let p of recentPages) {
   const fileContent = await dv.io.load(p.file.path);
-  const m = extractSecs(fileContent, "**Math**");
-  const ph = extractSecs(fileContent, "**Physics**");
-  const ch = extractSecs(fileContent, "**Chemistry**");
+  const m = extractSecsForSubject(fileContent, "**Math**");
+  const ph = extractSecsForSubject(fileContent, "**Physics**");
+  const ch = extractSecsForSubject(fileContent, "**Chemistry**");
   const total = m + ph + ch;
   
   const dayNum = p.file.name.slice(-2);
@@ -302,88 +155,12 @@ for (let p of recentPages) {
 
 dv.table(["Day", "Math", "Phy", "Chem", "Tot"], recentTableData);
 ```
-
----
-
-## All Past Sessions
-
-```dataviewjs
-function extractSecs(fileContent, subjectHeader) {
-  const safeHeader = subjectHeader.replace(/\*/g, "\\*");
-  const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
-  const match = fileContent.match(regex);
-  if (!match) return 0;
-  try {
-    const data = JSON.parse(match[1]);
-    let totalMs = 0;
-    if (data.entries) {
-      for (let entry of data.entries) {
-        if (entry.startTime && entry.endTime) totalMs += (new Date(entry.endTime).getTime() - new Date(entry.startTime).getTime());
-        if (entry.subEntries) {
-          for (let sub of entry.subEntries) {
-            if (sub.startTime && sub.endTime) totalMs += (new Date(sub.endTime).getTime() - new Date(sub.startTime).getTime());
-          }
-        }
-      }
-    } return Math.round(totalMs / 1000);
-  } catch (e) { return 0; }
-}
-
-function formatTime(totalSecs) {
-  if (!totalSecs) return "<span style='font-size: 0.8em; color: var(--text-muted);'>-</span>";
-  const h = Math.floor(totalSecs / 3600);
-  const m = Math.floor((totalSecs % 3600) / 60);
-  const s = totalSecs % 60;
-  let str = "";
-  if (h > 0) str += `${h}h `;
-  if (m > 0 || h > 0) str += `${m}m `;
-  str += `${s}s`;
-  return `<span style='font-size: 0.8em; white-space: nowrap;'>${str.trim()}</span>`;
-}
-
-const allPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'desc');
-const groupedByMonth = {};
-
-for (let p of allPages) {
-    const monthName = window.moment(p.file.name).format("MMMM YYYY");
-    if (!groupedByMonth[monthName]) groupedByMonth[monthName] = [];
-    groupedByMonth[monthName].push(p);
-}
-
-for (let month in groupedByMonth) {
-    const tableData = [];
-    
-    for (let p of groupedByMonth[month]) {
-        const content = await dv.io.load(p.file.path);
-        const m = extractSecs(content, "**Math**");
-        const ph = extractSecs(content, "**Physics**");
-        const ch = extractSecs(content, "**Chemistry**");
-        const total = m + ph + ch;
-        
-        const dayNum = p.file.name.slice(-2);
-        const dayLink = `<span style="font-size: 0.9em; font-weight: bold;">[[${p.file.path}|${dayNum}]]</span>`;
-        
-        tableData.push([
-            dayLink, 
-            formatTime(m), 
-            formatTime(ph), 
-            formatTime(ch), 
-            `**${formatTime(total)}**`
-        ]);
-    }
-    
-    const mdTable = dv.markdownTable(["Day", "Math", "Phy", "Chem", "Tot"], tableData);
-    const callout = `> [!info]- 📅 ${month}\n${mdTable.split('\n').map(line => '> ' + line).join('\n')}`;
-    dv.paragraph(callout);
-}
-```
-
 ---
 
 ## Math Activity
 
 ```dataviewjs
-function extractMins(fileContent, subjectHeader) {
+function extractMinsForSubject(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
   const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
   const match = fileContent.match(regex);
@@ -405,11 +182,11 @@ function extractMins(fileContent, subjectHeader) {
 }
 
 const mathData = [];
-const mathPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
+const mathPages = dv.pages('"Daily Notes"').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
 
 for (let p of mathPages) {
   const fileContent = await dv.io.load(p.file.path);
-  const mins = extractMins(fileContent, "**Math**");
+  const mins = extractMinsForSubject(fileContent, "**Math**");
   if (mins > 0) mathData.push({ date: p.file.name, value: mins });
 }
 
@@ -446,7 +223,7 @@ renderContributionGraph(this.container, {
 ## Physics Activity
 
 ```dataviewjs
-function extractMins(fileContent, subjectHeader) {
+function extractMinsForSubject(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
   const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
   const match = fileContent.match(regex);
@@ -468,11 +245,11 @@ function extractMins(fileContent, subjectHeader) {
 }
 
 const phyData = [];
-const phyPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
+const phyPages = dv.pages('"Daily Notes"').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
 
 for (let p of phyPages) {
   const fileContent = await dv.io.load(p.file.path);
-  const mins = extractMins(fileContent, "**Physics**");
+  const mins = extractMinsForSubject(fileContent, "**Physics**");
   if (mins > 0) phyData.push({ date: p.file.name, value: mins });
 }
 
@@ -509,7 +286,7 @@ renderContributionGraph(this.container, {
 ## Chemistry Activity
 
 ```dataviewjs
-function extractMins(fileContent, subjectHeader) {
+function extractMinsForSubject(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
   const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
   const match = fileContent.match(regex);
@@ -531,11 +308,11 @@ function extractMins(fileContent, subjectHeader) {
 }
 
 const chemData = [];
-const chemPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
+const chemPages = dv.pages('"Daily Notes"').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
 
 for (let p of chemPages) {
   const fileContent = await dv.io.load(p.file.path);
-  const mins = extractMins(fileContent, "**Chemistry**");
+  const mins = extractMinsForSubject(fileContent, "**Chemistry**");
   if (mins > 0) chemData.push({ date: p.file.name, value: mins });
 }
 
@@ -566,17 +343,20 @@ renderContributionGraph(this.container, {
   }
 });
 ```
+---
 
 ---
+
 
 ## Total Study Trend (All Time)
 
 ```dataviewjs
-function extractMins(fileContent, subjectHeader) {
+function extractMinsForSubject(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
   const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
   const match = fileContent.match(regex);
   if (!match) return 0;
+  
   try {
     const data = JSON.parse(match[1]);
     let totalMs = 0;
@@ -589,19 +369,23 @@ function extractMins(fileContent, subjectHeader) {
           }
         }
       }
-    } return Math.round(totalMs / 60000);
+    } 
+    return Math.round(totalMs / 60000);
   } catch (e) { return 0; }
 }
 
-const trendPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'asc'); 
+const trendPages = dv.pages('"Daily Notes"')
+  .where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/))
+  .sort(p => p.file.name, 'asc'); 
+
 const labels = [];
 const dataPoints = [];
 
 for (let p of trendPages) {
   const fileContent = await dv.io.load(p.file.path);
-  const m = extractMins(fileContent, "**Math**");
-  const ph = extractMins(fileContent, "**Physics**");
-  const ch = extractMins(fileContent, "**Chemistry**");
+  const m = extractMinsForSubject(fileContent, "**Math**");
+  const ph = extractMinsForSubject(fileContent, "**Physics**");
+  const ch = extractMinsForSubject(fileContent, "**Chemistry**");
   
   labels.push(p.file.name.slice(5)); 
   dataPoints.push(m + ph + ch);
@@ -622,22 +406,25 @@ const chartData = {
             tension: 0.4 
         }]
     },
-    options: { scales: { y: { beginAtZero: true } } }
+    options: {
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
 };
 
 window.renderChart(chartData, this.container);
 ```
 
----
-
 ## Subject Trends (All Time)
 
 ```dataviewjs
-function extractMins(fileContent, subjectHeader) {
+function extractMinsForSubject(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
   const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
   const match = fileContent.match(regex);
   if (!match) return 0;
+  
   try {
     const data = JSON.parse(match[1]);
     let totalMs = 0;
@@ -650,65 +437,93 @@ function extractMins(fileContent, subjectHeader) {
           }
         }
       }
-    } return Math.round(totalMs / 60000);
+    } 
+    return Math.round(totalMs / 60000);
   } catch (e) { return 0; }
 }
 
-const trendPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'asc'); 
+// Slices removed to load all time data
+const trendPages = dv.pages('"Daily Notes"')
+  .where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/))
+  .sort(p => p.file.name, 'asc'); 
+
 const labels = [];
-const mathPts = [], phyPts = [], chemPts = [];
+const mathPts = [];
+const phyPts = [];
+const chemPts = [];
 
 for (let p of trendPages) {
   const fileContent = await dv.io.load(p.file.path);
   labels.push(p.file.name.slice(5)); 
-  mathPts.push(extractMins(fileContent, "**Math**"));
-  phyPts.push(extractMins(fileContent, "**Physics**"));
-  chemPts.push(extractMins(fileContent, "**Chemistry**"));
+  mathPts.push(extractMinsForSubject(fileContent, "**Math**"));
+  phyPts.push(extractMinsForSubject(fileContent, "**Physics**"));
+  chemPts.push(extractMinsForSubject(fileContent, "**Chemistry**"));
 }
 
+// Math Chart (Orange)
 dv.header(3, "Math");
 window.renderChart({
     type: 'line',
     data: {
         labels: labels,
         datasets: [{
-            label: 'Math (Mins)', data: mathPts, borderColor: '#f97316',
-            backgroundColor: 'rgba(249, 115, 22, 0.1)', borderWidth: 2, pointBackgroundColor: '#ea580c', fill: true, tension: 0.4
+            label: 'Math (Mins)',
+            data: mathPts,
+            borderColor: '#f97316',
+            backgroundColor: 'rgba(249, 115, 22, 0.1)',
+            borderWidth: 2,
+            pointBackgroundColor: '#ea580c',
+            fill: true,
+            tension: 0.4
         }]
-    }, options: { scales: { y: { beginAtZero: true } } }
+    },
+    options: { scales: { y: { beginAtZero: true } } }
 }, this.container);
 
+// Physics Chart (Blue)
 dv.header(3, "Physics");
 window.renderChart({
     type: 'line',
     data: {
         labels: labels,
         datasets: [{
-            label: 'Physics (Mins)', data: phyPts, borderColor: '#38bdf8',
-            backgroundColor: 'rgba(56, 189, 248, 0.1)', borderWidth: 2, pointBackgroundColor: '#0ea5e9', fill: true, tension: 0.4
+            label: 'Physics (Mins)',
+            data: phyPts,
+            borderColor: '#38bdf8',
+            backgroundColor: 'rgba(56, 189, 248, 0.1)',
+            borderWidth: 2,
+            pointBackgroundColor: '#0ea5e9',
+            fill: true,
+            tension: 0.4
         }]
-    }, options: { scales: { y: { beginAtZero: true } } }
+    },
+    options: { scales: { y: { beginAtZero: true } } }
 }, this.container);
 
+// Chemistry Chart (Yellow)
 dv.header(3, "Chemistry");
 window.renderChart({
     type: 'line',
     data: {
         labels: labels,
         datasets: [{
-            label: 'Chemistry (Mins)', data: chemPts, borderColor: '#fde047',
-            backgroundColor: 'rgba(253, 224, 71, 0.1)', borderWidth: 2, pointBackgroundColor: '#eab308', fill: true, tension: 0.4
+            label: 'Chemistry (Mins)',
+            data: chemPts,
+            borderColor: '#fde047',
+            backgroundColor: 'rgba(253, 224, 71, 0.1)',
+            borderWidth: 2,
+            pointBackgroundColor: '#eab308',
+            fill: true,
+            tension: 0.4
         }]
-    }, options: { scales: { y: { beginAtZero: true } } }
+    },
+    options: { scales: { y: { beginAtZero: true } } }
 }, this.container);
 ```
-
----
-
 ## Subject Distribution (All Time)
 
 ```dataviewjs
-function extractMins(fileContent, subjectHeader) {
+function extractMinsForSubject(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
   const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
   const match = fileContent.match(regex);
@@ -729,14 +544,14 @@ function extractMins(fileContent, subjectHeader) {
   } catch (e) { return 0; }
 }
 
-const pages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
+const pages = dv.pages('"Daily Notes"').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
 let mTotal = 0, pTotal = 0, cTotal = 0;
 
 for (let p of pages) {
   const fileContent = await dv.io.load(p.file.path);
-  mTotal += extractMins(fileContent, "**Math**");
-  pTotal += extractMins(fileContent, "**Physics**");
-  cTotal += extractMins(fileContent, "**Chemistry**");
+  mTotal += extractMinsForSubject(fileContent, "**Math**");
+  pTotal += extractMinsForSubject(fileContent, "**Physics**");
+  cTotal += extractMinsForSubject(fileContent, "**Chemistry**");
 }
 
 if (mTotal > 0 || pTotal > 0 || cTotal > 0) {
@@ -756,3 +571,5 @@ if (mTotal > 0 || pTotal > 0 || cTotal > 0) {
     dv.paragraph("No study data logged yet.");
 }
 ```
+
+
