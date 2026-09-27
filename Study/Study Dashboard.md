@@ -306,7 +306,6 @@ dv.table(["Day", "Math", "Phy", "Chem", "Tot"], recentTableData);
 ---
 
 ## All Past Sessions
-
 ```dataviewjs
 function extractSecs(fileContent, subjectHeader) {
   const safeHeader = subjectHeader.replace(/\*/g, "\\*");
@@ -329,8 +328,12 @@ function extractSecs(fileContent, subjectHeader) {
   } catch (e) { return 0; }
 }
 
-function formatTime(totalSecs) {
-  if (!totalSecs) return "<span style='font-size: 0.8em; color: var(--text-muted);'>-</span>";
+function formatTime(totalSecs, isBold = false) {
+  const sortKey = String(totalSecs).padStart(7, '0');
+  if (!totalSecs) {
+      const dash = "<span style='font-size: 0.8em; color: var(--text-muted);'>-</span>";
+      return `<!--${sortKey}-->${isBold ? `**${dash}**` : dash}`;
+  }
   const h = Math.floor(totalSecs / 3600);
   const m = Math.floor((totalSecs % 3600) / 60);
   const s = totalSecs % 60;
@@ -338,7 +341,8 @@ function formatTime(totalSecs) {
   if (h > 0) str += `${h}h `;
   if (m > 0 || h > 0) str += `${m}m `;
   str += `${s}s`;
-  return `<span style='font-size: 0.8em; white-space: nowrap;'>${str.trim()}</span>`;
+  const span = `<span style='font-size: 0.8em; white-space: nowrap;'>${str.trim()}</span>`;
+  return `<!--${sortKey}-->${isBold ? `**${span}**` : span}`;
 }
 
 const allPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'desc');
@@ -361,14 +365,14 @@ for (let month in groupedByMonth) {
         const total = m + ph + ch;
         
         const dayNum = p.file.name.slice(-2);
-        const dayLink = `<span style="font-size: 0.9em; font-weight: bold;">[[${p.file.path}|${dayNum}]]</span>`;
+        const dayLink = `<!--${dayNum}-->[[${p.file.path}|${dayNum}]]`;
         
         tableData.push([
             dayLink, 
             formatTime(m), 
             formatTime(ph), 
             formatTime(ch), 
-            `**${formatTime(total)}**`
+            formatTime(total, true)
         ]);
     }
     
@@ -377,6 +381,7 @@ for (let month in groupedByMonth) {
     dv.paragraph(callout);
 }
 ```
+
 
 ---
 
