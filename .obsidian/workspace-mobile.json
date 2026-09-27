@@ -119,8 +119,7 @@
               "title": "2026-09-22"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -273,7 +272,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "78a42346e96da702",
+  "active": "d7421b8f9c250935",
   "lastOpenFiles": [
     "Study/Study Dashboard 2.md",
     "Daily Notes/Template/Daily note template.md",
