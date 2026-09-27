@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #1e1e1e; --card-bg: #2d2d2d; --text-main: #e0e0e0;
+            --text-muted: #a0a0a0; --success: #39d353; --border: #444;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main);
+            margin: 0; padding: 20px; display: flex; justify-content: center;
+        }
+        .container { max-width: 900px; width: 100%; }
+        .card { background-color: var(--card-bg); border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 1px solid var(--border); }
+        h2 { border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .stat-box { background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: bold; margin-top: 5px; }
+        .progress-container { width: 100%; background-color: var(--bg-color); border-radius: 8px; overflow: hidden; height: 20px; border: 1px solid var(--border); }
+        .progress-bar { background-color: var(--success); height: 100%; text-align: center; color: black; font-size: 12px; font-weight: bold; line-height: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border); }
+        .chart-container { position: relative; height: 300px; width: 100%; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📊 Study Dashboard</h1>
+    <p id="loading-status" style="color: var(--text-muted);">Fetching vault data...</p>
+
+    <div class="card">
+        <h2>Quick Stats</h2>
+        <div class="stats-grid">
+            <div class="stat-box"><div>Total Time</div><div class="stat-value" id="stat-total-time">0h</div></div>
+            <div class="stat-box"><div>Top Subject</div><div class="stat-value" id="stat-top-subject">-</div></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Recent Study Sessions</h2>
+        <table id="recent-table">
+            <thead><tr><th>Day</th><th>Math</th><th>Physics</th><th>Chemistry</th><th>Total</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Total Study Trend (Last 14 Days)</h2>
+        <div class="chart-container"><canvas id="trendChart"></canvas></div>
+    </div>
+</div>
+
+<script>
+    // Exact parsing logic from DataviewJS[span_2](start_span)[span_2](end_span)
+    function extractMins(fileContent, subjectHeader) {
+        const safeHeader = subjectHeader.replace(/\*/g, "\\*");
+        const regex = new RegExp(safeHeader + "[\\s\\S]*?```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```", "i");
+        const match = fileContent.match(regex);
+        if (!match) return 0;
+        try {
+            const data = JSON.parse(match[1]);
+            let totalMs = 0;
+            if (data.entries) {
+                for (let entry of data.entries) {
+                    if (entry.startTime && entry.endTime) totalMs += (new Date(entry.endTime).getTime() - new Date(entry.startTime).getTime());
+                    if (entry.subEntries) {
+                        for (let sub of entry.subEntries) {
+                            if (sub.startTime && sub.endTime) totalMs += (new Date(sub.endTime).getTime() - new Date(sub.startTime).getTime());
+                        }
+                    }
+                }
+            }
+            return Math.round(totalMs / 60000);
+        } catch (e) { return 0; }
+    }
+
+    async function loadDashboardData() {
+        const today = new Date();
+        const dataLog = [];
+        let mathTotal = 0, phyTotal = 0, chemTotal = 0;
+
+        // Loop through the past 14 days to fetch daily notes
+        for (let i = 13; i >= 0; i--) {
+            const targetDate = new Date(today);
+            targetDate.setDate(today.getDate() - i);
+            
+            const year = targetDate.getFullYear();
+            const month = String(targetDate.getMonth() + 1).padStart(2, '0');
+            const day = String(targetDate.getDate()).padStart(2, '0');
+            const dateStr = `${year}-${month}-${day}`;
+            
+            // Matches file structure: Daily Notes/2026/09/2026-09-21.md[span_3](start_span)[span_3](end_span)
+            const filePath = `./Daily Notes/${year}/${month}/${dateStr}.md`;
+
+            try {
+                const response = await fetch(filePath);
+                if (response.ok) {
+                    const text = await response.text();
+                    const math = extractMins(text, "**Math**");
+                    const phy = extractMins(text, "**Physics**");
+                    const chem = extractMins(text, "**Chemistry**");
+                    
+                    mathTotal += math; phyTotal += phy; chemTotal += chem;
+                    dataLog.push({ date: dateStr, math, phy, chem, total: math + phy + chem });
+                } else {
+                    dataLog.push({ date: dateStr, math: 0, phy: 0, chem: 0, total: 0 });
+                }
+            } catch (err) {
+                console.error("Could not fetch", filePath);
+                dataLog.push({ date: dateStr, math: 0, phy: 0, chem: 0, total: 0 });
+            }
+        }
+
+        renderDashboard(dataLog, mathTotal, phyTotal, chemTotal);
+    }
+
+    function renderDashboard(dataLog, mTotal, pTotal, cTotal) {
+        document.getElementById('loading-status').style.display = 'none';
+
+        // Quick Stats
+        const totalMins = mTotal + pTotal + cTotal;
+        document.getElementById('stat-total-time').innerText = (totalMins / 60).toFixed(1) + " hours";
+        
+        let topSubject = "None";
+        if (mTotal >= pTotal && mTotal >= cTotal && mTotal > 0) topSubject = "📐 Math";
+        else if (pTotal >= mTotal && pTotal >= cTotal && pTotal > 0) topSubject = "🍎 Physics";
+        else if (cTotal >= mTotal && cTotal >= pTotal && cTotal > 0) topSubject = "🧪 Chemistry";
+        document.getElementById('stat-top-subject').innerText = topSubject;
+
+        // Recent Table (Last 5 days)
+        const tbody = document.querySelector("#recent-table tbody");
+        const recentData = dataLog.slice(-5).reverse();
+        recentData.forEach(session => {
+            if(session.total === 0) return; // Skip empty days
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td style="font-weight:bold;">${session.date}</td>
+                <td>${session.math > 0 ? session.math + 'm' : '-'}</td>
+                <td>${session.phy > 0 ? session.phy + 'm' : '-'}</td>
+                <td>${session.chem > 0 ? session.chem + 'm' : '-'}</td>
+                <td style="font-weight:bold; color: var(--success);">${session.total}m</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // Trend Chart
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dataLog.map(d => d.date.slice(5)),
+                datasets: [{
+                    label: 'Total Study Time (Mins)',
+                    data: dataLog.map(d => d.total),
+                    borderColor: '#39d353',
+                    backgroundColor: 'rgba(57, 211, 83, 0.1)',
+                    borderWidth: 2, fill: true, tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true } },
+                plugins: { legend: { labels: { color: '#e0e0e0' } } }
+            }
+        });
+    }
+
+    // Start execution
+    loadDashboardData();
+</script>
+</body>
+</html>
