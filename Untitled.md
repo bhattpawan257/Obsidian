@@ -189,3 +189,5 @@
   <div style="width: 25px; height: 25px; background-color: #ffe100; border-radius: 4px;"></div>
   <div style="width: 25px; height: 25px; background-color: #f7ff00; border-radius: 4px;"></div>
 </div>
+<div>
+<div style="width: 25px; height: 25px; background-color: #ff5C00; border-radius: 4px;"></div>

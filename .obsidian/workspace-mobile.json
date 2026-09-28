@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study/Study Dashboard 2.md",
+                "file": "Untitled.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Study Dashboard 2"
+              "title": "Untitled"
             }
           },
           {
@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study/Study Dashboard.md",
+                "file": "Untitled.md",
                 "mode": "preview",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "Study Dashboard"
+              "title": "Untitled"
             }
           },
           {
@@ -120,7 +120,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -249,7 +249,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "Study Dashboard 2 1.md",
+            "file": "Untitled.md",
             "followCursor": false,
             "showSearch": false,
             "searchQuery": ""
@@ -273,13 +273,15 @@
       "bases:Create new base": false
     }
   },
-  "active": "f4b765e03fd7c31e",
+  "active": "4b67f18fbda2f37f",
   "lastOpenFiles": [
     "Study Dashboard 2 1.md",
+    "Untitled 1.md",
+    "Untitled.md",
+    "Daily Notes/2026/09/2026-09-23.md",
+    "Study/Study Dashboard 2.md",
     "Daily Notes/2026/09/2026-09-28.md",
     "dashboard.html",
-    "Study/Study Dashboard 2.md",
-    "Untitled.md",
     "Study/Study Dashboard.md",
     "Daily Notes/2026/09/2026-09-27.md",
     "Daily Notes/Template/Daily note template.md",
@@ -287,12 +289,10 @@
     "Untitled 3.md",
     "Daily Notes/2026/09/2026-09-25.md",
     "Daily Notes/2026/09/2026-09-24.md",
-    "Daily Notes/2026/09/2026-09-23.md",
     "Daily Notes/2026/09/2026-09-22.md",
     "Daily Notes/2026/09/2026-09-21.md",
     "Untitled 2.md",
     "Untitled 1",
-    "Untitled 1.md",
     "Untitled",
     "Daily Notes/2026/09",
     "Daily Notes/2026",

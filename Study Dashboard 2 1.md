@@ -166,14 +166,14 @@ renderContributionGraph(this.container, {
   toDate: window.moment().format("YYYY-MM-DD"),
     cellStyleRules: [
     { min: 1, max: 60, color: "#022c22" },       
-    { min: 61, max: 120, color: "#064e3b" },     
-    { min: 121, max: 180, color: "#047857" },    
-    { min: 181, max: 240, color: "#059669" },    
-    { min: 241, max: 300, color: "#10b981" },    
-    { min: 301, max: 360, color: "#34d399" },    
-    { min: 361, max: 420, color: "#00e676" },    
-    { min: 421, max: 480, color: "#14ff86" },    
-    { min: 481, max: 999999, color: "#42ff9f" }  
+    { min: 60, max: 120, color: "#064e3b" },     
+    { min: 120, max: 180, color: "#047857" },    
+    { min: 180, max: 240, color: "#059669" },    
+    { min: 240, max: 300, color: "#10b981" },    
+    { min: 300, max: 360, color: "#34d399" },    
+    { min: 360, max: 420, color: "#00e676" },    
+    { min: 420, max: 480, color: "#14ff86" },    
+    { min: 480, max: 999999, color: "#42ff9f" }  
   ],
   onCellClick: (item) => {
     if (item.value) {
@@ -335,12 +335,12 @@ renderContributionGraph(this.container, {
   toDate: window.moment().format("YYYY-MM-DD"),  
   cellStyleRules: [
     { min: 1, max: 30, color: "#2a0a02" },       
-    { min: 31, max: 60, color: "#5c1904" },      
-    { min: 61, max: 90, color: "#9a2b04" },      
-    { min: 91, max: 120, color: "#d44304" },     
-    { min: 121, max: 150, color: "#f97316" },    
-    { min: 151, max: 180, color: "#ff9500" },    
-    { min: 181, max: 999999, color: "#ffb700" }  
+    { min: 30, max: 60, color: "#5c1904" },      
+    { min: 60, max: 90, color: "#9a2b04" },      
+    { min: 90, max: 120, color: "#d44304" },     
+    { min: 120, max: 150, color: "#f97316" },    
+    { min: 150, max: 180, color: "#ff9500" },    
+    { min: 180, max: 999999, color: "#ffb700" }  
   ],
   onCellClick: (item) => {
     if (item.value) {
@@ -380,12 +380,12 @@ renderContributionGraph(this.container, {
   toDate: window.moment().format("YYYY-MM-DD"),
     cellStyleRules: [
     { min: 1, max: 30, color: "#021a2e" },       
-    { min: 31, max: 60, color: "#05375c" },      
-    { min: 61, max: 90, color: "#065996" },      
-    { min: 91, max: 120, color: "#0284c7" },     
-    { min: 121, max: 150, color: "#00a6ff" },    
-    { min: 151, max: 180, color: "#00ccff" },    
-    { min: 181, max: 999999, color: "#00eaff" }  
+    { min: 30, max: 60, color: "#05375c" },      
+    { min: 60, max: 90, color: "#065996" },      
+    { min: 90, max: 120, color: "#0284c7" },     
+    { min: 120, max: 150, color: "#00a6ff" },    
+    { min: 150, max: 180, color: "#00ccff" },    
+    { min: 180, max: 999999, color: "#00eaff" }  
   ],
   onCellClick: (item) => {
     if (item.value) {
@@ -425,12 +425,12 @@ renderContributionGraph(this.container, {
   toDate: window.moment().format("YYYY-MM-DD"),
     cellStyleRules: [
     { min: 1, max: 30, color: "#291502" },       
-    { min: 31, max: 60, color: "#593003" },      
-    { min: 61, max: 90, color: "#8a4d04" },      
-    { min: 91, max: 120, color: "#ca8a04" },     
-    { min: 121, max: 150, color: "#facc15" },    
-    { min: 151, max: 180, color: "#ffe100" },    
-    { min: 181, max: 999999, color: "#f7ff00" }  
+    { min: 30, max: 60, color: "#593003" },      
+    { min: 60, max: 90, color: "#8a4d04" },      
+    { min: 90, max: 120, color: "#ca8a04" },     
+    { min: 120, max: 150, color: "#facc15" },    
+    { min: 150, max: 180, color: "#ffe100" },    
+    { min: 180, max: 999999, color: "#f7ff00" }  
   ],
   onCellClick: (item) => {
     if (item.value) {
