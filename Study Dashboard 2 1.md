@@ -334,13 +334,13 @@ renderContributionGraph(this.container, {
   fromDate: "2026-09-01",
   toDate: window.moment().format("YYYY-MM-DD"),  
   cellStyleRules: [
-    { min: 1, max: 30, color: "#2a0a02" },       
-    { min: 30, max: 60, color: "#5c1904" },      
-    { min: 60, max: 90, color: "#9a2b04" },      
-    { min: 90, max: 120, color: "#d44304" },     
-    { min: 120, max: 150, color: "#f97316" },    
-    { min: 150, max: 180, color: "#ff9500" },    
-    { min: 180, max: 999999, color: "#ffb700" }  
+    { min: 1, max: 29, color: "hsl(18, 100%, 12%)" },    
+    { min: 30, max: 59, color: "hsl(18, 100%, 18%)" },   
+    { min: 60, max: 89, color: "hsl(18, 100%, 25%)" },   
+    { min: 90, max: 119, color: "hsl(18, 100%, 31%)" },  
+    { min: 120, max: 149, color: "hsl(18, 100%, 38%)" }, 
+    { min: 150, max: 179, color: "hsl(18, 100%, 44%)" }, 
+    { min: 180, max: 999999, color: "hsl(18, 100%, 50%)" } 
   ],
   onCellClick: (item) => {
     if (item.value) {
@@ -378,14 +378,14 @@ renderContributionGraph(this.container, {
   showAllDays: true,
   fromDate: "2026-09-01",
   toDate: window.moment().format("YYYY-MM-DD"),
-    cellStyleRules: [
-    { min: 1, max: 30, color: "#021a2e" },       
-    { min: 30, max: 60, color: "#05375c" },      
-    { min: 60, max: 90, color: "#065996" },      
-    { min: 90, max: 120, color: "#0284c7" },     
-    { min: 120, max: 150, color: "#00a6ff" },    
-    { min: 150, max: 180, color: "#00ccff" },    
-    { min: 180, max: 999999, color: "#00eaff" }  
+  cellStyleRules: [
+    { min: 1, max: 29, color: "hsl(203, 100%, 12%)" },    
+    { min: 30, max: 59, color: "hsl(203, 100%, 18%)" },   
+    { min: 60, max: 89, color: "hsl(203, 100%, 25%)" },   
+    { min: 90, max: 119, color: "hsl(203, 100%, 31%)" },  
+    { min: 120, max: 149, color: "hsl(203, 100%, 38%)" }, 
+    { min: 150, max: 179, color: "hsl(203, 100%, 44%)" }, 
+    { min: 180, max: 999999, color: "hsl(203, 100%, 50%)" } 
   ],
   onCellClick: (item) => {
     if (item.value) {

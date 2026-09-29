@@ -189,5 +189,24 @@
   <div style="width: 25px; height: 25px; background-color: #ffe100; border-radius: 4px;"></div>
   <div style="width: 25px; height: 25px; background-color: #f7ff00; border-radius: 4px;"></div>
 </div>
-<div>
-<div style="width: 25px; height: 25px; background-color: #ff5C00; border-radius: 4px;"></div>
+
+<p><strong>Custom #ff4d00 Gradient (HSL)</strong></p>
+<div style="display: flex; gap: 4px; margin-bottom: 8px;">
+  <div style="width: 25px; height: 25px; background-color: hsl(18, 100%, 12%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(18, 100%, 18%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(18, 100%, 25%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(18, 100%, 31%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(18, 100%, 38%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(18, 100%, 44%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(18, 100%, 50%); border-radius: 4px;"></div>
+</div>
+<p><strong>Custom #009dff Gradient (HSL)</strong></p>
+<div style="display: flex; gap: 4px; margin-bottom: 8px;">
+  <div style="width: 25px; height: 25px; background-color: hsl(203, 100%, 12%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(203, 100%, 18%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(203, 100%, 25%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(203, 100%, 31%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(203, 100%, 38%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(203, 100%, 44%); border-radius: 4px;"></div>
+  <div style="width: 25px; height: 25px; background-color: hsl(203, 100%, 50%); border-radius: 4px;"></div>
+</div>
