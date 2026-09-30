@@ -1,4 +1,12 @@
 ```dataviewjs
+// 1. Daily Note Quick-Action Button
+const btn = this.container.createEl('button', { text: "📝 Open Today's Note", cls: "mod-cta" });
+btn.style.width = "100%";
+btn.style.padding = "12px";
+btn.style.fontSize = "1.2em";
+btn.style.fontWeight = "bold";
+btn.style.marginBottom = "15px";
+btn.onclick = () => { app.commands.executeCommandById("daily-notes"); };
 
 // 2. Master Helper Functions (Centralized)
 // These functions load once here and power the entire rest of the dashboard
@@ -129,68 +137,6 @@ while(activeDates.has(checkDate)) {
 dv.paragraph(`> [!abstract] 📊 Quick Stats\n> **Total Time:** ${totalHours} hours\n> **Daily Average:** ${avgMins} mins/day\n> **Top Subject:** ${topSubject}\n> 🔥 **Current Streak:** ${streak} Days`);
 ```
 
-```dataviewjs
-// Auto-Sync Master JSON on load
-(async () => {
-    try {
-        const pages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'asc');
-        const masterData = [];
-
-        function extractRawEntries(fileContent, subjectHeader) {
-            const safeHeader = subjectHeader.replace(/\*/g, "\\*");
-            const sectionRegex = new RegExp(safeHeader + "([\\s\\S]*?)(?:\\n#|\\n\\*\\*|$)", "i");
-            const sectionMatch = fileContent.match(sectionRegex);
-            if (!sectionMatch) return [];
-            
-            const trackerRegex = /```simple-time-tracker\s*(\{[\s\S]*?\})\s*```/g;
-            let match;
-            let combinedEntries = [];
-            while ((match = trackerRegex.exec(sectionMatch[1])) !== null) {
-                try {
-                    const data = JSON.parse(match[1]);
-                    if (data.entries) combinedEntries.push(...data.entries);
-                } catch (e) {}
-            }
-            return combinedEntries;
-        }
-
-        for (let p of pages) {
-            const fileContent = await dv.io.load(p.file.path);
-            const mathEntries = extractRawEntries(fileContent, "**Math**");
-            const phyEntries = extractRawEntries(fileContent, "**Physics**");
-            const chemEntries = extractRawEntries(fileContent, "**Chemistry**");
-            
-            if (mathEntries.length > 0 || phyEntries.length > 0 || chemEntries.length > 0) {
-                masterData.push({
-                    date: p.file.name,
-                    math: mathEntries,
-                    physics: phyEntries,
-                    chemistry: chemEntries
-                });
-            }
-        }
-
-        const jsonString = JSON.stringify(masterData, null, 2);
-        const filePath = "study-data.json";
-        
-        const fileExists = await app.vault.adapter.exists(filePath);
-        let existingContent = "";
-        if (fileExists) {
-            existingContent = await app.vault.adapter.read(filePath);
-        }
-
-        // Only overwrite the file if the data has actually changed
-        if (jsonString !== existingContent) {
-            await app.vault.adapter.write(filePath, jsonString);
-            new Notice("🔄 Master JSON automatically updated!");
-        }
-        
-    } catch (err) {
-        console.error("Error auto-updating JSON:", err);
-    }
-})();
-```
-
 ---
 
 ## Total Study Activity
@@ -218,16 +164,11 @@ renderContributionGraph(this.container, {
   showAllDayLabel: true,
   fromDate: "2026-09-01",
   toDate: window.moment().format("YYYY-MM-DD"),
-    cellStyleRules: [
-    { min: 1, max: 60, color: "#022c22" },       
-    { min: 60, max: 120, color: "#064e3b" },     
-    { min: 120, max: 180, color: "#047857" },    
-    { min: 180, max: 240, color: "#059669" },    
-    { min: 240, max: 300, color: "#10b981" },    
-    { min: 300, max: 360, color: "#34d399" },    
-    { min: 360, max: 420, color: "#00e676" },    
-    { min: 420, max: 480, color: "#14ff86" },    
-    { min: 480, max: 999999, color: "#42ff9f" }  
+  cellStyleRules: [
+    { min: 1, max: 90, color: "#0e4429" },       
+    { min: 91, max: 180, color: "#006d32" },      
+    { min: 181, max: 270, color: "#26a641" },     
+    { min: 271, max: 999999, color: "#39d353" }  
   ],
   onCellClick: (item) => {
     if (item.value) {
@@ -245,16 +186,7 @@ renderContributionGraph(this.container, {
 ```
 
 ---
-```dataviewjs
-const btn = this.container.createEl('button', { text: "📝 Open Today's Note", cls: "mod-cta" });
-btn.style.width = "100%";
-btn.style.padding = "12px";
-btn.style.fontSize = "1.2em";
-btn.style.fontWeight = "bold";
-btn.style.marginBottom = "15px";
-btn.onclick = () => { app.commands.executeCommandById("daily-notes"); };
 
-```
 ## Weekly Goal: 15 Hours
 
 ```dataviewjs
@@ -395,15 +327,12 @@ renderContributionGraph(this.container, {
   cellStyle: { minWidth: "14px", minHeight: "14px" },
   showAllDays: true,
   fromDate: "2026-09-01",
-  toDate: window.moment().format("YYYY-MM-DD"),  
+  toDate: window.moment().format("YYYY-MM-DD"),
   cellStyleRules: [
-    { min: 1, max: 29, color: "hsl(18, 100%, 12%)" },    
-    { min: 30, max: 59, color: "hsl(18, 100%, 18%)" },   
-    { min: 60, max: 89, color: "hsl(18, 100%, 25%)" },   
-    { min: 90, max: 119, color: "hsl(18, 100%, 31%)" },  
-    { min: 120, max: 149, color: "hsl(18, 100%, 38%)" }, 
-    { min: 150, max: 179, color: "hsl(18, 100%, 44%)" }, 
-    { min: 180, max: 999999, color: "hsl(18, 100%, 50%)" } 
+    { min: 1, max: 60, color: "#7c2d12" },       
+    { min: 61, max: 120, color: "#c2410c" },      
+    { min: 121, max: 180, color: "#ea580c" },     
+    { min: 181, max: 999999, color: "#f97316" }  
   ],
   onCellClick: (item) => {
     if (item.value) {
@@ -442,13 +371,10 @@ renderContributionGraph(this.container, {
   fromDate: "2026-09-01",
   toDate: window.moment().format("YYYY-MM-DD"),
   cellStyleRules: [
-    { min: 1, max: 29, color: "hsl(203, 100%, 12%)" },    
-    { min: 30, max: 59, color: "hsl(203, 100%, 18%)" },   
-    { min: 60, max: 89, color: "hsl(203, 100%, 25%)" },   
-    { min: 90, max: 119, color: "hsl(203, 100%, 31%)" },  
-    { min: 120, max: 149, color: "hsl(203, 100%, 38%)" }, 
-    { min: 150, max: 179, color: "hsl(203, 100%, 44%)" }, 
-    { min: 180, max: 999999, color: "hsl(203, 100%, 50%)" } 
+    { min: 1, max: 60, color: "#0c4a6e" },       
+    { min: 61, max: 120, color: "#0284c7" },      
+    { min: 121, max: 180, color: "#0ea5e9" },     
+    { min: 181, max: 999999, color: "#38bdf8" }  
   ],
   onCellClick: (item) => {
     if (item.value) {
@@ -486,14 +412,11 @@ renderContributionGraph(this.container, {
   showAllDays: true,
   fromDate: "2026-09-01",
   toDate: window.moment().format("YYYY-MM-DD"),
-    cellStyleRules: [
-    { min: 1, max: 30, color: "#291502" },       
-    { min: 30, max: 60, color: "#593003" },      
-    { min: 60, max: 90, color: "#8a4d04" },      
-    { min: 90, max: 120, color: "#ca8a04" },     
-    { min: 120, max: 150, color: "#facc15" },    
-    { min: 150, max: 180, color: "#ffe100" },    
-    { min: 180, max: 999999, color: "#f7ff00" }  
+  cellStyleRules: [
+    { min: 1, max: 60, color: "#a16207" },       
+    { min: 61, max: 120, color: "#ca8a04" },      
+    { min: 121, max: 180, color: "#eab308" },     
+    { min: 181, max: 999999, color: "#fde047" }  
   ],
   onCellClick: (item) => {
     if (item.value) {
