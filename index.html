@@ -333,7 +333,7 @@
 
     async function initializeDashboard() {
         try {
-            const response = await fetch('study-data.json');
+            const response = await fetch('./study-data.json');
             const data = await response.json();
 
             let totalMath = 0, totalPhy = 0, totalChem = 0;

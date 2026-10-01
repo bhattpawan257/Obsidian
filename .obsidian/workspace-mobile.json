@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study Dashboard 2 1.md",
+                "file": "Daily Notes/2026/10/2026-10-01.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Study Dashboard 2 1"
+              "title": "2026-10-01"
             }
           },
           {
@@ -289,9 +289,9 @@
   },
   "active": "f5b0af5a8aa17b5c",
   "lastOpenFiles": [
+    "Study Dashboard 2 1.md",
     "index.html",
     "Daily Notes/2026/10/2026-10-01.md",
-    "Study Dashboard 2 1.md",
     "Daily Notes/2026/10",
     "study-data.json",
     "Untitled.canvas",
@@ -324,7 +324,6 @@
     "Daily Notes/2026-09-21.md",
     "Daily Notes/2026-09-22.md",
     "Daily Notes/Template",
-    "Daily Notes",
-    "Study"
+    "Daily Notes"
   ]
 }
