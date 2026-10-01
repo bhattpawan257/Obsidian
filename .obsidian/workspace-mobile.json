@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Study/Study Dashboard.md",
+                "file": "Daily Notes/2026/10/2026-10-01.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Study Dashboard"
+              "title": "2026-10-01"
             }
           },
           {
@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Daily Notes/2026/10/2026-10-01.md",
+                "file": "Study Dashboard 2 1.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2026-10-01"
+              "title": "Study Dashboard 2 1"
             }
           },
           {
@@ -133,8 +133,7 @@
               "title": "2026-09-22"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -230,7 +229,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "Study Dashboard.md",
+            "file": "Study Dashboard 2 1.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -249,7 +248,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "Study Dashboard.md",
+            "file": "Study Dashboard 2 1.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           },
@@ -287,11 +286,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "f5b0af5a8aa17b5c",
+  "active": "eba3f89759a41b47",
   "lastOpenFiles": [
+    "Study/Study Dashboard.md",
+    "Daily Notes/2026/10/2026-10-01.md",
     "Study Dashboard 2 1.md",
     "index.html",
-    "Daily Notes/2026/10/2026-10-01.md",
     "Daily Notes/2026/10",
     "study-data.json",
     "Untitled.canvas",
@@ -299,7 +299,6 @@
     "Untitled 1.md",
     "Study Dashboard 1.md",
     "Study/Study Dashboard 2.md",
-    "Study/Study Dashboard.md",
     "Study/Study Dashboard 2 1.md",
     "Daily Notes/2026/09/2026-09-30.md",
     "Daily Notes/2026/09/2026-09-29.md",
