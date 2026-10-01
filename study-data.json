@@ -213,7 +213,13 @@
         "endTime": "2026-10-01T12:02:47.393Z"
       }
     ],
-    "physics": [],
+    "physics": [
+      {
+        "name": "Laws of motion",
+        "startTime": "2026-10-01T12:46:12.786Z",
+        "endTime": "2026-10-01T13:09:01.092Z"
+      }
+    ],
     "chemistry": [
       {
         "name": "Mole concept ",
