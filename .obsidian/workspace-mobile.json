@@ -22,6 +22,20 @@
             }
           },
           {
+            "id": "31746fdc9719537e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled 2 1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled 2 1"
+            }
+          },
+          {
             "id": "f4b765e03fd7c31e",
             "type": "leaf",
             "state": {
@@ -133,7 +147,8 @@
               "title": "2026-09-22"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -262,7 +277,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "Daily Notes/2026/09/2026-09-22.md",
+            "file": "Untitled 2 1.md",
             "followCursor": false,
             "showSearch": false,
             "searchQuery": ""
@@ -286,8 +301,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "eba3f89759a41b47",
+  "active": "31746fdc9719537e",
   "lastOpenFiles": [
+    "Untitled 2.md",
+    "Untitled 2 1.md",
+    "Untitled 1.md",
     "Daily Notes/2026/09/2026-09-30.md",
     "Daily Notes/2026/09/2026-09-29.md",
     "Daily Notes/2026/09/2026-09-28.md",
@@ -299,7 +317,6 @@
     "Daily Notes/2026/09/2026-09-22.md",
     "Daily Notes/2026/09/2026-09-21.md",
     "Study/Study Dashboard 2.md",
-    "Untitled 1.md",
     "Study Dashboard 2 1.md",
     "Untitled.canvas",
     "Daily Notes/2026/10/2026-10-01.md",
@@ -313,7 +330,6 @@
     "dashboard.html",
     "Daily Notes/Template/Daily note template.md",
     "Untitled 3.md",
-    "Untitled 2.md",
     "Untitled 1",
     "Untitled",
     "Daily Notes/2026/09",
