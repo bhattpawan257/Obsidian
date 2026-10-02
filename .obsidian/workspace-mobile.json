@@ -25,17 +25,14 @@
             "id": "31746fdc9719537e",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": -513.1465999309555,
-                  "y": -7405.384113600517,
-                  "zoom": -1.4471340212723405
-                }
+                "file": "Study/Study Dashboard 1.md",
+                "mode": "preview",
+                "source": true
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
+              "icon": "lucide-file",
+              "title": "Study Dashboard 1"
             }
           },
           {
@@ -280,7 +277,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "Untitled 2 1.md",
+            "file": "Study/Study Dashboard 1.md",
             "followCursor": false,
             "showSearch": false,
             "searchQuery": ""
@@ -307,10 +304,13 @@
   "active": "31746fdc9719537e",
   "lastOpenFiles": [
     "Untitled 2 1.md",
-    "Daily Notes/2026/10/2026-10-02.md",
-    "Study/Study Dashboard 2.md",
+    "Study/Study Dashboard 1.md",
     "Untitled.canvas",
+    "Daily Notes/2026/10/2026-10-02.md",
+    "Study/Study Dashboard.md",
+    "Study/Study Dashboard 2.md",
     "Study Dashboard 2 1.md",
+    "Untitled.md",
     "Untitled 2.md",
     "Untitled 1.md",
     "Daily Notes/2026/09/2026-09-30.md",
@@ -324,12 +324,9 @@
     "Daily Notes/2026/09/2026-09-22.md",
     "Daily Notes/2026/09/2026-09-21.md",
     "Daily Notes/2026/10/2026-10-01.md",
-    "Study/Study Dashboard.md",
     "index.html",
     "Daily Notes/2026/10",
     "study-data.json",
-    "Untitled.md",
-    "Study Dashboard 1.md",
     "Study/Study Dashboard 2 1.md",
     "dashboard.html",
     "Daily Notes/Template/Daily note template.md",
@@ -340,7 +337,6 @@
     "Daily Notes/2026",
     "Daily Notes/2026-09-24.md",
     "Daily Notes/2026-09-25.md",
-    "Daily Notes/2026-09-21.md",
     "Daily Notes/Template",
     "Daily Notes"
   ]
