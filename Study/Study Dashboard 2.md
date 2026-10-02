@@ -443,6 +443,8 @@ for (let month in groupedByMonth) {
 
 ## Math Activity
 
+^009c10
+
 ```dataviewjs
 const mathData = [];
 const mathPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/));
