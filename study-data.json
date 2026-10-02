@@ -238,5 +238,17 @@
         ]
       }
     ]
+  },
+  {
+    "date": "2026-10-02",
+    "math": [
+      {
+        "name": "Quadratic equations",
+        "startTime": "2026-10-02T09:43:35.000Z",
+        "endTime": "2026-10-02T12:22:10.578Z"
+      }
+    ],
+    "physics": [],
+    "chemistry": []
   }
 ]

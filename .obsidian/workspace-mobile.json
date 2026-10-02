@@ -25,14 +25,17 @@
             "id": "31746fdc9719537e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "Untitled 2 1.md",
-                "mode": "preview",
-                "source": true
+                "file": "Untitled.canvas",
+                "viewState": {
+                  "x": -513.1465999309555,
+                  "y": -7405.384113600517,
+                  "zoom": -1.4471340212723405
+                }
               },
-              "icon": "lucide-file",
-              "title": "Untitled 2 1"
+              "icon": "lucide-layout-dashboard",
+              "title": "Untitled"
             }
           },
           {
@@ -303,8 +306,10 @@
   },
   "active": "31746fdc9719537e",
   "lastOpenFiles": [
-    "Untitled.canvas",
     "Untitled 2 1.md",
+    "Daily Notes/2026/10/2026-10-02.md",
+    "Study/Study Dashboard 2.md",
+    "Untitled.canvas",
     "Study Dashboard 2 1.md",
     "Untitled 2.md",
     "Untitled 1.md",
@@ -318,7 +323,6 @@
     "Daily Notes/2026/09/2026-09-23.md",
     "Daily Notes/2026/09/2026-09-22.md",
     "Daily Notes/2026/09/2026-09-21.md",
-    "Study/Study Dashboard 2.md",
     "Daily Notes/2026/10/2026-10-01.md",
     "Study/Study Dashboard.md",
     "index.html",
