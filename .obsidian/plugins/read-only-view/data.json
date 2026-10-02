@@ -11,13 +11,17 @@
     "Template/",
     "Daily Notes/"
   ],
-  "excludeRules": [],
+  "excludeRules": [
+    "Study/Study Dashboard 2.md"
+  ],
   "includeRuleEnabled": [
     true,
     true,
     true
   ],
-  "excludeRuleEnabled": [],
+  "excludeRuleEnabled": [
+    true
+  ],
   "includeRuleEntries": [
     {
       "sourceKind": "vault-path",
@@ -38,5 +42,12 @@
       "enabled": true
     }
   ],
-  "excludeRuleEntries": []
+  "excludeRuleEntries": [
+    {
+      "sourceKind": "vault-path",
+      "sourceValue": "Study/Study Dashboard 2",
+      "resolvedPath": "Study/Study Dashboard 2.md",
+      "enabled": true
+    }
+  ]
 }

@@ -1,9 +1,15 @@
 {
 	"nodes":[
-		{"id":"a167737fcf99847e","x":-119,"y":28,"width":419,"height":432,"type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Total Study Activity"},
-		{"id":"4ab041409a2a0256","x":-319,"y":680,"width":400,"height":360,"type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Math Activity"},
-		{"id":"eceb77c51b8e54b3","x":701,"y":622,"width":400,"height":400,"type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry Activity"},
-		{"id":"63ab34c59df71ca8","x":-310,"y":1160,"width":382,"height":355,"type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics Activity"}
+		{"id":"a167737fcf99847e","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Total Study Activity","x":-160,"y":-120,"width":500,"height":480},
+		{"id":"63ab34c59df71ca8","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics Activity","x":-600,"y":720,"width":391,"height":360},
+		{"id":"eceb77c51b8e54b3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry Activity","x":-110,"y":720,"width":400,"height":360},
+		{"id":"4ab041409a2a0256","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Math Activity","x":372,"y":720,"width":400,"height":360},
+		{"id":"62d0c7455b970ccd","type":"file","file":"Study/Study Dashboard 2.md","x":-600,"y":1240,"width":391,"height":360},
+		{"id":"856c3e8b2e6884d4","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics Activity","x":-600,"y":1720,"width":391,"height":360}
 	],
-	"edges":[]
+	"edges":[
+		{"id":"33b26ddf3fbc41b5","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"eceb77c51b8e54b3","toSide":"top"},
+		{"id":"29905990078892a3","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"63ab34c59df71ca8","toSide":"top"},
+		{"id":"63ea0b567c7a19ef","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"4ab041409a2a0256","toSide":"top"}
+	]
 }

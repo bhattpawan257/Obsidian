@@ -678,8 +678,10 @@ window.renderChart(chartData, this.container);
 ```
 
 
+
 ## Subject Trends (All Time)
 
+### Math
 ```dataviewjs
 const trendPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'asc'); 
 const labels = [];
@@ -693,7 +695,6 @@ for (let p of trendPages) {
   chemPts.push(window.studyHelpers.extractMins(fileContent, "**Chemistry**"));
 }
 
-dv.header(3, "Math");
 window.renderChart({
     type: 'line',
     data: {
@@ -705,7 +706,6 @@ window.renderChart({
     }, options: { scales: { y: { beginAtZero: true } } }
 }, this.container);
 
-dv.header(3, "Physics");
 window.renderChart({
     type: 'line',
     data: {
@@ -717,7 +717,7 @@ window.renderChart({
     }, options: { scales: { y: { beginAtZero: true } } }
 }, this.container);
 
-dv.header(3, "Chemistry");
+
 window.renderChart({
     type: 'line',
     data: {
