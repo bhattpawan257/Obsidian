@@ -39,14 +39,17 @@
             "id": "f4b765e03fd7c31e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "Study/Study Dashboard 2.md",
-                "mode": "source",
-                "source": true
+                "file": "Untitled.canvas",
+                "viewState": {
+                  "x": 116.50696951542871,
+                  "y": 1430.543402203233,
+                  "zoom": -1.1241732463855774
+                }
               },
-              "icon": "lucide-file",
-              "title": "Study Dashboard 2"
+              "icon": "lucide-layout-dashboard",
+              "title": "Untitled"
             }
           },
           {
@@ -303,8 +306,8 @@
   },
   "active": "f4b765e03fd7c31e",
   "lastOpenFiles": [
-    "Untitled.canvas",
     "Study/Study Dashboard 2.md",
+    "Untitled.canvas",
     "Study/Study Dashboard 1.md",
     "Study/Study Dashboard.md",
     "Daily Notes/2026/09/2026-09-28.md",

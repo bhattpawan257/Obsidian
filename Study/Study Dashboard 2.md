@@ -51,7 +51,6 @@
 
         if (jsonString !== existingContent) {
             await app.vault.adapter.write(filePath, jsonString);
-            new Notice("🔄 Master JSON automatically updated!");
         }
     } catch (err) {
         console.error("Error auto-updating JSON:", err);
@@ -680,20 +679,18 @@ window.renderChart(chartData, this.container);
 
 
 ## Subject Trends (All Time)
-
-### Math
+### Maths
 ```dataviewjs
 const trendPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'asc'); 
 const labels = [];
-const mathPts = [], phyPts = [], chemPts = [];
+const mathPts = [];
 
 for (let p of trendPages) {
   const fileContent = await dv.io.load(p.file.path);
   labels.push(p.file.name.slice(5)); 
   mathPts.push(window.studyHelpers.extractMins(fileContent, "**Math**"));
-  phyPts.push(window.studyHelpers.extractMins(fileContent, "**Physics**"));
-  chemPts.push(window.studyHelpers.extractMins(fileContent, "**Chemistry**"));
 }
+
 
 window.renderChart({
     type: 'line',
@@ -705,6 +702,18 @@ window.renderChart({
         }]
     }, options: { scales: { y: { beginAtZero: true } } }
 }, this.container);
+```
+### Physics
+```dataviewjs
+const trendPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'asc'); 
+const labels = [];
+const phyPts=[];
+
+for (let p of trendPages) {
+  const fileContent = await dv.io.load(p.file.path);
+  labels.push(p.file.name.slice(5));
+  phyPts.push(window.studyHelpers.extractMins(fileContent, "**Physics**"));
+}
 
 window.renderChart({
     type: 'line',
@@ -716,7 +725,18 @@ window.renderChart({
         }]
     }, options: { scales: { y: { beginAtZero: true } } }
 }, this.container);
+```
+### Chemistry
+```dataviewjs
+const trendPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'asc'); 
+const labels = [];
+const chemPts = [];
 
+for (let p of trendPages) {
+  const fileContent = await dv.io.load(p.file.path);
+  labels.push(p.file.name.slice(5));
+  chemPts.push(window.studyHelpers.extractMins(fileContent, "**Chemistry**"));
+}
 
 window.renderChart({
     type: 'line',
@@ -728,8 +748,8 @@ window.renderChart({
         }]
     }, options: { scales: { y: { beginAtZero: true } } }
 }, this.container);
-```
 
+```
 ---
 
 ## Subject Distribution (All Time)
