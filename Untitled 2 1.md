@@ -382,7 +382,7 @@ for (let p of recentPages) {
   const total = m + ph + ch;
   
   const dayNum = p.file.name.slice(-2);
-  const dayLink = `<!--${dayNum}--> [[${p.file.path}|${dayNum}]]`;
+  const dayLink = `<span style="font-size: 0.9em; font-weight: bold;">[[${p.file.path}|${dayNum}]]</span>`;
   
   recentTableData.push([
     dayLink, 
@@ -848,7 +848,6 @@ for (let p of allPages) {
     });
 }
 
-// Added 'container' parameter to safely pass the rendering context
 function createPieChart(title, dataObj, palette, container) {
     const sortedTopics = Object.keys(dataObj).sort((a, b) => dataObj[b] - dataObj[a]);
     if (sortedTopics.length === 0) return;
@@ -857,6 +856,13 @@ function createPieChart(title, dataObj, palette, container) {
     const dataVals = sortedTopics.map(t => Math.round(dataObj[t] / 60000)); 
     const bgColors = labels.map((_, i) => palette[i % palette.length]);
     
+    // Wrapper to prevent the chart from squishing on mobile
+    const chartDiv = container.createEl('div');
+    chartDiv.style.position = 'relative';
+    chartDiv.style.height = '250px';
+    chartDiv.style.width = '100%';
+    chartDiv.style.marginBottom = '25px';
+
     const chartData = {
         type: 'pie',
         data: {
@@ -864,15 +870,20 @@ function createPieChart(title, dataObj, palette, container) {
             datasets: [{
                 data: dataVals,
                 backgroundColor: bgColors,
-                borderWidth: 2,
-                borderColor: 'var(--background-primary)'
+                borderWidth: 1,
+                borderColor: '#1e1e1e'
             }]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: { 
                     position: 'right', 
-                    labels: { color: 'var(--text-normal)' } 
+                    labels: { 
+                        color: '#e0e0e0', // Hardcoded fallback for visibility
+                        font: { size: 12 }
+                    } 
                 },
                 tooltip: {
                     callbacks: {
@@ -890,14 +901,13 @@ function createPieChart(title, dataObj, palette, container) {
     };
     
     dv.header(3, title);
-    window.renderChart(chartData, container);
+    window.renderChart(chartData, chartDiv);
 }
 
 const mathColors = ['#ffb700', '#ff9500', '#f97316', '#d44304', '#9a2b04', '#5c1904', '#2a0a02'];
 const phyColors = ['#00eaff', '#00ccff', '#00a6ff', '#0284c7', '#065996', '#05375c', '#021a2e'];
 const chemColors = ['#f7ff00', '#ffe100', '#facc15', '#ca8a04', '#8a4d04', '#593003', '#291502'];
 
-// Passed 'this.container' into the function calls
 createPieChart("📐 Math Topics", mathData, mathColors, this.container);
 createPieChart("🍎 Physics Topics", phyData, phyColors, this.container);
 createPieChart("🧪 Chemistry Topics", chemData, chemColors, this.container);

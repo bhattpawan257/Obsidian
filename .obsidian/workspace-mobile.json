@@ -28,8 +28,8 @@
               "type": "markdown",
               "state": {
                 "file": "Untitled 2 1.md",
-                "mode": "source",
-                "source": false
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
               "title": "Untitled 2 1"
@@ -303,8 +303,10 @@
   },
   "active": "31746fdc9719537e",
   "lastOpenFiles": [
-    "Untitled 2.md",
+    "Untitled.canvas",
     "Untitled 2 1.md",
+    "Study Dashboard 2 1.md",
+    "Untitled 2.md",
     "Untitled 1.md",
     "Daily Notes/2026/09/2026-09-30.md",
     "Daily Notes/2026/09/2026-09-29.md",
@@ -317,8 +319,6 @@
     "Daily Notes/2026/09/2026-09-22.md",
     "Daily Notes/2026/09/2026-09-21.md",
     "Study/Study Dashboard 2.md",
-    "Study Dashboard 2 1.md",
-    "Untitled.canvas",
     "Daily Notes/2026/10/2026-10-01.md",
     "Study/Study Dashboard.md",
     "index.html",
@@ -337,7 +337,6 @@
     "Daily Notes/2026-09-24.md",
     "Daily Notes/2026-09-25.md",
     "Daily Notes/2026-09-21.md",
-    "Daily Notes/2026-09-22.md",
     "Daily Notes/Template",
     "Daily Notes"
   ]
