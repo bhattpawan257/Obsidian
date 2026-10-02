@@ -614,8 +614,8 @@ const chartData = {
 
 window.renderChart(chartData, this.container);
 ```
-
 ---
+## Combined Study Trends
 ```dataviewjs
 const trendPages = dv.pages('#study-log').where(p => p.file.name.match(/\d{4}-\d{2}-\d{2}/)).sort(p => p.file.name, 'asc'); 
 const labels = [];
@@ -671,12 +671,9 @@ const chartData = {
         interaction: { mode: 'index', intersect: false }
     }
 };
-
-dv.header(3, "Combined Subject Trends");
 window.renderChart(chartData, this.container);
 ```
-
-
+---
 
 ## Subject Trends (All Time)
 ### Maths
@@ -750,8 +747,6 @@ window.renderChart({
 }, this.container);
 
 ```
----
-
 ## Subject Distribution (All Time)
 
 ```dataviewjs
