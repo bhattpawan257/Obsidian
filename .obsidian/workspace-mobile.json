@@ -39,16 +39,12 @@
             "id": "f4b765e03fd7c31e",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "bases",
               "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": -249.3228155772889,
-                  "y": 1966.1146625290403,
-                  "zoom": -1.6996818716358288
-                }
+                "file": "Untitled.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-layout-dashboard",
+              "icon": "lucide-table",
               "title": "Untitled"
             }
           },
@@ -306,9 +302,10 @@
   },
   "active": "f4b765e03fd7c31e",
   "lastOpenFiles": [
+    "Untitled.canvas",
+    "Untitled.base",
     "Daily Notes/2026/10/2026-10-03.md",
     "Study/Study Dashboard 2.md",
-    "Untitled.canvas",
     "Study/Study Dashboard.md",
     "Study/Study Dashboard 1.md",
     "Daily Notes/2026/09/2026-09-28.md",
@@ -340,8 +337,6 @@
     "Daily Notes/2026/09",
     "Daily Notes/2026",
     "Daily Notes/2026-09-24.md",
-    "Daily Notes/2026-09-25.md",
-    "Daily Notes/Template",
-    "Daily Notes"
+    "Daily Notes/Template"
   ]
 }

@@ -8,8 +8,8 @@
 		{"id":"eceb77c51b8e54b3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry Activity","x":-120,"y":720,"width":400,"height":360},
 		{"id":"63ab34c59df71ca8","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics Activity","x":-610,"y":720,"width":391,"height":360},
 		{"id":"dcab6006c29d179d","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry","x":-219,"y":1240,"width":598,"height":360},
-		{"id":"844ad53f9dd3c10c","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics","x":-909,"y":1240,"width":598,"height":360},
-		{"id":"b012721446ee8eb3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Maths","x":480,"y":1240,"width":598,"height":360}
+		{"id":"b012721446ee8eb3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Maths","x":480,"y":1240,"width":598,"height":360},
+		{"id":"844ad53f9dd3c10c","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics","x":-909,"y":1240,"width":598,"height":360}
 	],
 	"edges":[
 		{"id":"33b26ddf3fbc41b5","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"eceb77c51b8e54b3","toSide":"top","color":"3"},
@@ -20,9 +20,10 @@
 		{"id":"abe65018dd732f4a","fromNode":"dcab6006c29d179d","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"3"},
 		{"id":"74e6d3ff5121a0eb","fromNode":"63ab34c59df71ca8","fromSide":"bottom","toNode":"844ad53f9dd3c10c","toSide":"top","color":"5"},
 		{"id":"fea10c2ac5300392","fromNode":"4ab041409a2a0256","fromSide":"bottom","toNode":"b012721446ee8eb3","toSide":"top","color":"2"},
-		{"id":"2be5fa66454d3643","fromNode":"844ad53f9dd3c10c","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"right","color":"5"},
 		{"id":"a4786d4716c2cfbf","fromNode":"844ad53f9dd3c10c","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"5"},
 		{"id":"545d5a784a5a6f8d","fromNode":"b012721446ee8eb3","fromSide":"bottom","toNode":"58bd101b15b5fec8","toSide":"top","color":"2"},
-		{"id":"59e649180cf2ee2c","fromNode":"b012721446ee8eb3","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"2"}
+		{"id":"59e649180cf2ee2c","fromNode":"b012721446ee8eb3","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"2"},
+		{"id":"4cd183d939b8bdf0","fromNode":"844ad53f9dd3c10c","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"5"},
+		{"id":"92624d1ee6bc992b","fromNode":"844ad53f9dd3c10c","fromSide":"bottom","toNode":"58bd101b15b5fec8","toSide":"top","color":"5"}
 	]
 }

@@ -250,5 +250,17 @@
     ],
     "physics": [],
     "chemistry": []
+  },
+  {
+    "date": "2026-10-03",
+    "math": [],
+    "physics": [],
+    "chemistry": [
+      {
+        "name": "Chemical Bonding",
+        "startTime": "2026-10-03T04:09:25.955Z",
+        "endTime": "2026-10-03T05:22:26.151Z"
+      }
+    ]
   }
 ]
