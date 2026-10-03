@@ -1,3 +1,8 @@
+---
+canvas:
+  - "[[Untitled.canvas]]"
+Untitled: []
+---
 #study-log
 
 ## Study Trackers

@@ -39,12 +39,30 @@
             "id": "f4b765e03fd7c31e",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "Untitled.base",
-                "viewName": "Table"
+                "file": "Study/Study Dashboard 2.md",
+                "mode": "preview",
+                "source": true
               },
-              "icon": "lucide-table",
+              "icon": "lucide-file",
+              "title": "Study Dashboard 2"
+            }
+          },
+          {
+            "id": "c1b61d2e486423ba",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Untitled.canvas",
+                "viewState": {
+                  "x": -4959.423443256513,
+                  "y": 1298.8264443376984,
+                  "zoom": -2.707508074273942
+                }
+              },
+              "icon": "lucide-layout-dashboard",
               "title": "Untitled"
             }
           },
@@ -147,7 +165,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -300,16 +318,16 @@
       "bases:Create new base": false
     }
   },
-  "active": "f4b765e03fd7c31e",
+  "active": "c1b61d2e486423ba",
   "lastOpenFiles": [
+    "Untitled.md",
     "Untitled.canvas",
+    "Study/Study Dashboard 2.md",
     "Untitled.base",
     "Daily Notes/2026/10/2026-10-03.md",
-    "Study/Study Dashboard 2.md",
     "Study/Study Dashboard.md",
     "Study/Study Dashboard 1.md",
     "Daily Notes/2026/09/2026-09-28.md",
-    "Untitled.md",
     "Untitled 2 1.md",
     "Daily Notes/2026/10/2026-10-02.md",
     "Study Dashboard 2 1.md",

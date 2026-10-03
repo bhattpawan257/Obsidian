@@ -1,3 +1,4 @@
+
 ```dataviewjs
 // 1. Auto-Sync Master JSON on load
 (async () => {
@@ -442,7 +443,6 @@ for (let month in groupedByMonth) {
 
 ## Math Activity
 
-^009c10
 
 ```dataviewjs
 const mathData = [];
