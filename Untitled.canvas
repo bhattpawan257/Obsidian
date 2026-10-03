@@ -1,10 +1,6 @@
 {
 	"nodes":[
-		{"id":"2c554b70e49fda11","x":-5714,"y":457,"width":1700,"height":1700,"type":"group","label":"Untitled group"},
 		{"id":"a167737fcf99847e","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Total Study Activity","x":-160,"y":-120,"width":480,"height":440},
-		{"id":"69cd40182eb49885","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Subject Distribution (All Time)","x":572,"y":-120,"width":508,"height":560},
-		{"id":"869c7915af5964e1","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Total Study Trend (All Time)","x":158,"y":1840,"width":668,"height":400},
-		{"id":"58bd101b15b5fec8","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Combined Study Trends","x":-600,"y":1840,"width":668,"height":400},
 		{"id":"4ab041409a2a0256","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Math Activity","x":379,"y":720,"width":400,"height":360},
 		{"id":"eceb77c51b8e54b3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry Activity","x":-120,"y":720,"width":400,"height":360},
 		{"id":"63ab34c59df71ca8","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics Activity","x":-610,"y":720,"width":391,"height":360},
@@ -12,20 +8,10 @@
 		{"id":"b012721446ee8eb3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Maths","x":480,"y":1240,"width":598,"height":360},
 		{"id":"844ad53f9dd3c10c","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics","x":-909,"y":1240,"width":598,"height":360},
 		{"id":"187e6e204218c206","x":-209,"y":-1120,"width":578,"height":505,"type":"text","text":"```dataviewjs \n\n// Independent Helper Functions (No external scripts required)\nfunction extractSecs(fileContent, subjectHeader) {\n    const safeHeader = subjectHeader.replace(/\\*/g, \"\\\\*\");\n    const sectionRegex = new RegExp(safeHeader + \"([\\\\s\\\\S]*?)(?=\\\\n#|\\\\n\\\\*\\\\*|$)\", \"gi\");\n    let totalMs = 0;\n    let sectionMatch;\n    \n    while ((sectionMatch = sectionRegex.exec(fileContent)) !== null) {\n        const trackerRegex = /```simple-time-tracker\\s*(\\{[\\s\\S]*?\\})\\s*```/g;\n        let match;\n        while ((match = trackerRegex.exec(sectionMatch[1])) !== null) {\n            try {\n                const data = JSON.parse(match[1]);\n                if (data.entries) {\n                    for (let entry of data.entries) {\n                        if (entry.startTime && entry.endTime) totalMs += (new Date(entry.endTime).getTime() - new Date(entry.startTime).getTime());\n                        if (entry.subEntries) {\n                            for (let sub of entry.subEntries) {\n                                if (sub.startTime && sub.endTime) totalMs += (new Date(sub.endTime).getTime() - new Date(sub.startTime).getTime());\n                            }\n                        }\n                    }\n                }\n            } catch (e) {}\n        }\n    }\n    return Math.round(totalMs / 1000);\n}\n\nfunction formatTime(totalSecs, isBold = false) {\n    const sortKey = String(totalSecs).padStart(7, '0');\n    if (!totalSecs) {\n        const dash = \"<span style='font-size: 0.8em; color: var(--text-muted);'>-</span>\";\n        return `<!--${sortKey}--> ${isBold ? `<span style=\"font-weight:bold;\">${dash}</span>` : dash}`;\n    }\n    const h = Math.floor(totalSecs / 3600);\n    const m = Math.floor((totalSecs % 3600) / 60);\n    const s = totalSecs % 60;\n    let str = \"\";\n    if (h > 0) str += `${h}h `;\n    if (m > 0 || h > 0) str += `${m}m `;\n    str += `${s}s`;\n    const span = `<span style='font-size: 0.8em; white-space: nowrap; ${isBold ? \"font-weight:bold;\" : \"\"}'>${str.trim()}</span>`;\n    return `<!--${sortKey}--> ${span}`;\n}\n\n// Data Fetching and Table Generation\nconst allPages = dv.pages('#study-log').where(p => p.file.name.match(/\\d{4}-\\d{2}-\\d{2}/)).sort(p => p.file.name, 'desc');\nconst masterTableData = [];\n\nfor (let p of allPages) {\n    const content = await dv.io.load(p.file.path);\n    const m = extractSecs(content, \"**Math**\");\n    const ph = extractSecs(content, \"**Physics**\");\n    const ch = extractSecs(content, \"**Chemistry**\");\n    const total = m + ph + ch;\n    \n    // Use Dataview's native fileLink function for clean rendering and sorting\n    const fullDateLink = dv.fileLink(p.file.path, false, p.file.name);\n    \n    const mStr = formatTime(m);\n    const phStr = formatTime(ph);\n    const chStr = formatTime(ch);\n    const totStr = formatTime(total, true);\n\n    masterTableData.push([fullDateLink, mStr, phStr, chStr, totStr]);\n}\n\n// Render the table directly without the callout dropdown\ndv.table([\"Date\", \"Math\", \"Phy\", \"Chem\", \"Tot\"], masterTableData);\n\n```"},
-		{"id":"938a5c6d2654bac2","x":-5694,"y":477,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-21.md"},
-		{"id":"6608e1cc957ea168","x":-5274,"y":477,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-22.md"},
-		{"id":"9f074f1ad45b8457","x":-4854,"y":477,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-23.md"},
-		{"id":"72a3a01252fca768","x":-4434,"y":477,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-24.md"},
-		{"id":"4d9a7fffe669f0c3","x":-5694,"y":897,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-25.md"},
-		{"id":"ef618a5ebff4f7c7","x":-4854,"y":897,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-27.md"},
-		{"id":"25c6396ede039f7f","x":-4434,"y":897,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-28.md"},
-		{"id":"ee98a8541846b5bf","x":-5694,"y":1317,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-29.md"},
-		{"id":"fe2063816a7bb3fb","x":-4854,"y":1317,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/10/2026-10-01.md"},
-		{"id":"2d67f8168e326090","x":-4434,"y":1317,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/10/2026-10-02.md"},
-		{"id":"44c2c99965434c78","x":-5274,"y":897,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-26.md"},
-		{"id":"6027154f6e85b1bc","x":-5274,"y":1317,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/09/2026-09-30.md"},
-		{"id":"d4ccbbf9295f3242","x":-5694,"y":1737,"width":400,"height":400,"type":"file","file":"Daily Notes/2026/10/2026-10-03.md"},
-		{"id":"7c8b5a732d9119d7","x":-5274,"y":1737,"width":400,"height":400,"type":"file","file":"Daily Notes/Template/Daily note template.md"}
+		{"id":"69cd40182eb49885","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Subject Distribution (All Time)","x":-174,"y":2335,"width":508,"height":584},
+		{"id":"58bd101b15b5fec8","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Combined Study Trends","x":-645,"y":1840,"width":668,"height":400},
+		{"id":"869c7915af5964e1","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Total Study Trend (All Time)","x":146,"y":1840,"width":668,"height":400},
+		{"id":"f6d3bd6b3099b58d","x":-1879,"y":-1120,"width":970,"height":1248,"type":"text","text":"```dataviewjs\n// Format matching your daily note file names\nconst today = moment().format(\"YYYY/MM/YYYY-MM-DD\");\n\n// If your notes are in a folder, add it here (e.g., \"Daily Notes/\" or \"\")\nconst folder = \"Daily Notes/\"; \nconst path = `${folder}${today}.md`;\n\nconst file = app.vault.getAbstractFileByPath(path);\n\nif (file) {\n    // 1. Clickable link header pointing to the file\n    dv.header(3, dv.fileLink(file.path, false, `📅 Open Today's Note (${today})`));\n    \n    // 2. Render note content\n    const content = await app.vault.read(file);\n    dv.paragraph(content);\n} else {\n    dv.paragraph(`*Daily note for [[${today}]] does not exist yet.*`);\n}\n```\n\n"}
 	],
 	"edges":[
 		{"id":"33b26ddf3fbc41b5","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"eceb77c51b8e54b3","toSide":"top","color":"3"},
@@ -41,7 +27,9 @@
 		{"id":"59e649180cf2ee2c","fromNode":"b012721446ee8eb3","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"2"},
 		{"id":"4cd183d939b8bdf0","fromNode":"844ad53f9dd3c10c","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"5"},
 		{"id":"92624d1ee6bc992b","fromNode":"844ad53f9dd3c10c","fromSide":"bottom","toNode":"58bd101b15b5fec8","toSide":"top","color":"5"},
-		{"id":"11e81f1b5ca6ec71","fromNode":"187e6e204218c206","fromSide":"bottom","toNode":"a167737fcf99847e","toSide":"top"},
-		{"id":"0a62874535f4c2f8","fromNode":"187e6e204218c206","fromSide":"bottom","toNode":"69cd40182eb49885","toSide":"top"}
+		{"id":"11e81f1b5ca6ec71","fromNode":"187e6e204218c206","fromSide":"bottom","toNode":"a167737fcf99847e","toSide":"top","color":"4"},
+		{"id":"de3d0dd9c8ee035d","fromNode":"f6d3bd6b3099b58d","fromSide":"right","toNode":"187e6e204218c206","toSide":"left","color":"6"},
+		{"id":"428b8d088996a88a","fromNode":"58bd101b15b5fec8","fromSide":"bottom","toNode":"69cd40182eb49885","toSide":"top","color":"4"},
+		{"id":"e2d46bbbb421427f","fromNode":"869c7915af5964e1","fromSide":"bottom","toNode":"69cd40182eb49885","toSide":"top","color":"4"}
 	]
 }
