@@ -1,27 +1,28 @@
 {
 	"nodes":[
 		{"id":"a167737fcf99847e","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Total Study Activity","x":-160,"y":-120,"width":480,"height":440},
-		{"id":"63ab34c59df71ca8","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics Activity","x":-600,"y":720,"width":391,"height":360},
-		{"id":"eceb77c51b8e54b3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry Activity","x":-110,"y":720,"width":400,"height":360},
-		{"id":"4ab041409a2a0256","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Math Activity","x":372,"y":720,"width":400,"height":360},
 		{"id":"69cd40182eb49885","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Subject Distribution (All Time)","x":572,"y":-120,"width":508,"height":560},
 		{"id":"869c7915af5964e1","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Total Study Trend (All Time)","x":158,"y":1840,"width":668,"height":400},
 		{"id":"58bd101b15b5fec8","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Combined Study Trends","x":-600,"y":1840,"width":668,"height":400},
-		{"id":"dcab6006c29d179d","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry","x":-244,"y":1240,"width":668,"height":400},
-		{"id":"62d0c7455b970ccd","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics","x":-934,"y":1240,"width":668,"height":400},
-		{"id":"4fb8002262cfc4ef","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Maths","x":460,"y":1240,"width":668,"height":400}
+		{"id":"4ab041409a2a0256","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Math Activity","x":379,"y":720,"width":400,"height":360},
+		{"id":"eceb77c51b8e54b3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry Activity","x":-120,"y":720,"width":400,"height":360},
+		{"id":"63ab34c59df71ca8","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics Activity","x":-610,"y":720,"width":391,"height":360},
+		{"id":"dcab6006c29d179d","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Chemistry","x":-219,"y":1240,"width":598,"height":360},
+		{"id":"844ad53f9dd3c10c","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Physics","x":-909,"y":1240,"width":598,"height":360},
+		{"id":"b012721446ee8eb3","type":"file","file":"Study/Study Dashboard 2.md","subpath":"#Maths","x":480,"y":1240,"width":598,"height":360}
 	],
 	"edges":[
-		{"id":"33b26ddf3fbc41b5","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"eceb77c51b8e54b3","toSide":"top"},
-		{"id":"29905990078892a3","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"63ab34c59df71ca8","toSide":"top"},
-		{"id":"63ea0b567c7a19ef","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"4ab041409a2a0256","toSide":"top"},
-		{"id":"ae91a00402f3a02c","fromNode":"eceb77c51b8e54b3","fromSide":"bottom","toNode":"dcab6006c29d179d","toSide":"top"},
-		{"id":"768c5d5704eef195","fromNode":"63ab34c59df71ca8","fromSide":"bottom","toNode":"62d0c7455b970ccd","toSide":"top"},
-		{"id":"1f5de2e6674fad94","fromNode":"4ab041409a2a0256","fromSide":"bottom","toNode":"4fb8002262cfc4ef","toSide":"top"},
-		{"id":"04280dd2de5730b7","fromNode":"62d0c7455b970ccd","fromSide":"bottom","toNode":"58bd101b15b5fec8","toSide":"top"},
-		{"id":"4bf4dcdf7728f82e","fromNode":"dcab6006c29d179d","fromSide":"bottom","toNode":"58bd101b15b5fec8","toSide":"top"},
-		{"id":"9717d61e2e0d585c","fromNode":"4fb8002262cfc4ef","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top"},
-		{"id":"abe65018dd732f4a","fromNode":"dcab6006c29d179d","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top"},
-		{"id":"6c5bf22dc53d540b","fromNode":"62d0c7455b970ccd","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top"}
+		{"id":"33b26ddf3fbc41b5","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"eceb77c51b8e54b3","toSide":"top","color":"3"},
+		{"id":"29905990078892a3","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"63ab34c59df71ca8","toSide":"top","color":"5"},
+		{"id":"63ea0b567c7a19ef","fromNode":"a167737fcf99847e","fromSide":"bottom","toNode":"4ab041409a2a0256","toSide":"top","color":"1"},
+		{"id":"ae91a00402f3a02c","fromNode":"eceb77c51b8e54b3","fromSide":"bottom","toNode":"dcab6006c29d179d","toSide":"top","color":"3"},
+		{"id":"4bf4dcdf7728f82e","fromNode":"dcab6006c29d179d","fromSide":"bottom","toNode":"58bd101b15b5fec8","toSide":"top","color":"3"},
+		{"id":"abe65018dd732f4a","fromNode":"dcab6006c29d179d","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"3"},
+		{"id":"74e6d3ff5121a0eb","fromNode":"63ab34c59df71ca8","fromSide":"bottom","toNode":"844ad53f9dd3c10c","toSide":"top","color":"5"},
+		{"id":"fea10c2ac5300392","fromNode":"4ab041409a2a0256","fromSide":"bottom","toNode":"b012721446ee8eb3","toSide":"top","color":"2"},
+		{"id":"2be5fa66454d3643","fromNode":"844ad53f9dd3c10c","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"right","color":"5"},
+		{"id":"a4786d4716c2cfbf","fromNode":"844ad53f9dd3c10c","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"5"},
+		{"id":"545d5a784a5a6f8d","fromNode":"b012721446ee8eb3","fromSide":"bottom","toNode":"58bd101b15b5fec8","toSide":"top","color":"2"},
+		{"id":"59e649180cf2ee2c","fromNode":"b012721446ee8eb3","fromSide":"bottom","toNode":"869c7915af5964e1","toSide":"top","color":"2"}
 	]
 }
